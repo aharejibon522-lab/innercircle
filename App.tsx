@@ -6,7 +6,7 @@ import { io, Socket } from "socket.io-client";
 const SERVER_URL = process.env.EXPO_PUBLIC_SERVER_URL || "https://innercircle-backend-mb2i.onrender.com";
 const gold = "#D7B56D";
 const missions = ["Make someone laugh without speaking","Get another player to say your name","Convince the group to take a selfie","Give someone a sincere compliment","Get two players to high-five"];
-const dares = ["Do your best celebrity impression","Speak in an accent for one round","Let the group choose your profile pose","Tell the funniest thing that happened to you","Do a dramatic movie monologue","Dance for 15 seconds"];
+
 type Player = { id:string; name:string; score:number; connected?:boolean };
 type Room = { code:string; players:Player[]; hostId:string; status:string };
 export default function App() {
@@ -26,6 +26,7 @@ export default function App() {
     s.on("room:update",(r:Room)=>setRoom(r));
     s.on("room:error",(m:string)=>Alert.alert("The Circle",m));
     s.on("game:mission",(m:string)=>setMission(m));
+    s.on("game:dare",({dare}:{dare:string})=>setDare(dare));
     return ()=>{s.disconnect();};
   },[]);
   const playerId = socket?.id;
@@ -33,7 +34,7 @@ export default function App() {
   const createRoom=()=>{if(!name.trim()||!socket)return;setBusy(true);socket.emit("room:create",{name:name.trim()},()=>setBusy(false));};
   const joinRoom=()=>{if(!name.trim()||!code.trim()||!socket)return;setBusy(true);socket.emit("room:join",{name:name.trim(),code:code.trim().toUpperCase()},()=>setBusy(false));};
   const leave=()=>{socket?.emit("room:leave");setRoom(null);setMission("");};
-  const spin=()=>setDare(dares[Math.floor(Math.random()*dares.length)]);
+  const spin=()=>socket?.emit("game:dare-spin");
   const completeMission=()=>{if(mission&&socket){socket.emit("game:mission-complete",{mission});setMission("");}};
   return <SafeAreaView style={styles.safe}><StatusBar style="light"/><ScrollView contentContainerStyle={styles.page}>
     <View style={styles.top}><View style={styles.mark}><Text style={styles.markText}>IC</Text></View><View style={{flex:1}}><Text style={styles.eyebrow}>THE PRIVATE PARTY GAME</Text><Text style={styles.brand}>INNER CIRCLE</Text></View><View style={[styles.dot,{backgroundColor:connected?"#69C99B":"#D36B6B"}]}/></View>
