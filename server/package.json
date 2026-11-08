@@ -1,16 +1,15 @@
 {
   "name": "innercircle-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "engines": {
-    "node": ">=20"
+    "node": "20.x"
   },
   "dependencies": {
-    "better-sqlite3": "^11.8.1",
     "socket.io": "^4.8.1"
   }
 }
