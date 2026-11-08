@@ -3,7 +3,7 @@ services:
     name: innercircle-backend
     runtime: node
     region: singapore
-    plan: starter
+    plan: free
     rootDir: server
     buildCommand: npm install
     startCommand: npm start
@@ -12,8 +12,4 @@ services:
       - key: NODE_ENV
         value: production
       - key: DB_PATH
-        value: /var/data/innercircle.sqlite
-    disk:
-      name: innercircle-data
-      mountPath: /var/data
-      sizeGB: 1
+        value: /tmp/innercircle.sqlite
