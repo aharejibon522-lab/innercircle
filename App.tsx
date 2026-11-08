@@ -3,7 +3,7 @@ import { SafeAreaView, View, Text, TextInput, Pressable, ScrollView, StyleSheet,
 import { StatusBar } from "expo-status-bar";
 import { io, Socket } from "socket.io-client";
 
-const SERVER_URL = process.env.EXPO_PUBLIC_SERVER_URL || "http://localhost:3000";
+const SERVER_URL = process.env.EXPO_PUBLIC_SERVER_URL || "https://innercircle-backend-mb2i.onrender.com";
 const gold = "#D7B56D";
 const missions = ["Make someone laugh without speaking","Get another player to say your name","Convince the group to take a selfie","Give someone a sincere compliment","Get two players to high-five"];
 const dares = ["Do your best celebrity impression","Speak in an accent for one round","Let the group choose your profile pose","Tell the funniest thing that happened to you","Do a dramatic movie monologue","Dance for 15 seconds"];
