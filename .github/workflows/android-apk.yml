@@ -37,6 +37,12 @@ jobs:
       - name: Install JavaScript dependencies
         run: npm install
 
+      - name: Align Expo SDK dependencies
+        run: npx expo install --fix
+
+      - name: Reinstall aligned dependencies
+        run: npm install
+
       - name: Generate Android project
         run: npx expo prebuild --platform android --clean --no-install
 
