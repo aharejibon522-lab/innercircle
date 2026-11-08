@@ -117,11 +117,16 @@ function leaveSocket(socket) {
   if (!info) return;
   socketPlayers.delete(socket.id);
   const room = rooms.get(info.code);
-  const player = room && room.players.get(info.id);
-  if (player) {
-    player.connected = false;
-    player.activeMission = null;
-    broadcast(room);
+  if (room) {
+    room.players.delete(info.id);
+    if (room.hostId === info.id) {
+      room.hostId = room.players.keys().next().value || null;
+    }
+    if (room.players.size === 0) {
+      rooms.delete(info.code);
+    } else {
+      broadcast(room);
+    }
   }
   socket.leave(info.code);
 }
