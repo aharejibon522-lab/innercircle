@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "The Inner Circle",
+    "slug": "the-inner-circle",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "backgroundColor": "#09090D"
+    },
+    "android": {
+      "package": "com.innercircle.party",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#09090D"
+      }
+    },
+    "ios": {
+      "supportsTablet": false
+    },
+    "plugins": [
+      "expo-font"
+    ]
+  }
+}
